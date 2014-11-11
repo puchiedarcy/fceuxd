@@ -2917,6 +2917,19 @@ static int movie_isfromsavestate (lua_State *L) {
 		return 0;
 }
 
+static int movie_record (lua_State *L) {
+	std::string filename = strdup(FCEU_MakeFName(FCEUMKF_MOVIE,0,0).c_str());
+	size_t sep = filename.find_last_of("\\/");
+	filename = filename.substr(0, sep) + PSS + "Phase 005.fm2";
+
+	std::wstring author = L"puchiedarcy";
+	EMOVIE_FLAG flags = MOVIE_FLAG_NONE;
+
+	FCEUI_SaveMovie(filename.c_str(), flags, author);
+	
+	return 0;
+}
+
 
 #define LUA_SCREEN_WIDTH    256
 #define LUA_SCREEN_HEIGHT   240
@@ -5455,7 +5468,7 @@ static const struct luaL_reg movielib[] = {
 	{"readonly", movie_getreadonly},
 	{"setreadonly", movie_setreadonly},
 	{"replay", movie_replay},
-//	{"record", movie_record},
+	{"record", movie_record},
 //	{"play", movie_playback},
 
 	// alternative names
