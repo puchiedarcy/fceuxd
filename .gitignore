@@ -1,3 +1,6 @@
+output/
+vc/
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
