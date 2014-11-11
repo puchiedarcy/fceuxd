@@ -2918,9 +2918,11 @@ static int movie_isfromsavestate (lua_State *L) {
 }
 
 static int movie_record (lua_State *L) {
+	const char *phase = luaL_checkstring(L,1);
+
 	std::string filename = strdup(FCEU_MakeFName(FCEUMKF_MOVIE,0,0).c_str());
 	size_t sep = filename.find_last_of("\\/");
-	filename = filename.substr(0, sep) + PSS + "Phase 005.fm2";
+	filename = filename.substr(0, sep) + PSS + phase + ".fm2";
 
 	std::wstring author = L"puchiedarcy";
 	EMOVIE_FLAG flags = MOVIE_FLAG_NONE;
