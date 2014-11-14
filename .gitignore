@@ -1,4 +1,11 @@
 output/movies
+output/7z.dll
+output/auxlib.lua
+output/fceux.cfg
+output/fceux.exe
+output/fceux.exp
+output/fceux.lib
+output/fceux.pdb
 vc/
 
 # Windows image file caches
