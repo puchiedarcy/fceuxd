@@ -2932,6 +2932,19 @@ static int movie_record (lua_State *L) {
 	return 0;
 }
 
+static int movie_playback (lua_State *L) {
+	const char *phase = luaL_checkstring(L,1);
+	int stop_frame = luaL_checkinteger(L,2);
+
+	std::string filename = strdup(FCEU_MakeFName(FCEUMKF_MOVIE,0,0).c_str());
+	size_t sep = filename.find_last_of("\\/");
+	filename = filename.substr(0, sep) + PSS + phase + ".fm2";
+	
+	FCEUI_LoadMovie(filename.c_str(), true, stop_frame);
+	
+	return 0;
+}
+
 
 #define LUA_SCREEN_WIDTH    256
 #define LUA_SCREEN_HEIGHT   240
@@ -5471,12 +5484,12 @@ static const struct luaL_reg movielib[] = {
 	{"setreadonly", movie_setreadonly},
 	{"replay", movie_replay},
 	{"record", movie_record},
-//	{"play", movie_playback},
+	{"play", movie_playback},
 
 	// alternative names
 	{"close", movie_stop},
 	{"getname", movie_getname},
-//	{"playback", movie_playback},
+	{"playback", movie_playback},
 	{"playbeginning", movie_replay},
 	{"getreadonly", movie_getreadonly},
 	{"ispoweron", movie_ispoweron},					//If movie recorded from power-on
