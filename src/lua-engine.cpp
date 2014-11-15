@@ -2945,6 +2945,15 @@ static int movie_playback (lua_State *L) {
 	return 0;
 }
 
+static int movie_directory (lua_State *L) {
+	std::string filename = strdup(FCEU_MakeFName(FCEUMKF_MOVIE,0,0).c_str());
+	size_t sep = filename.find_last_of("\\/");
+	filename = filename.substr(0, sep) + PSS;
+
+	lua_pushstring(L, filename.c_str());
+	return 1;
+}
+
 
 #define LUA_SCREEN_WIDTH    256
 #define LUA_SCREEN_HEIGHT   240
@@ -5485,6 +5494,7 @@ static const struct luaL_reg movielib[] = {
 	{"replay", movie_replay},
 	{"record", movie_record},
 	{"play", movie_playback},
+	{"directory", movie_directory},
 
 	// alternative names
 	{"close", movie_stop},
