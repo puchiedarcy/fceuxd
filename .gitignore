@@ -6,6 +6,8 @@ output/fceux.exe
 output/fceux.exp
 output/fceux.lib
 output/fceux.pdb
+output/fcs/
+output/snaps/
 vc/
 
 # Windows image file caches
